@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block nav %}
+    {% include('nav.html.twig') %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
+        </ol>
+    </nav>
+{% endblock %}
+
+{% block container %}
+    <div class="card w-100 bg-light text-center">
+            <div class="card-header bg-dark text-white">
+                <div class="card-title font-weight-bold fa-2x">
+                    Cadastro Usuários
+                </div>
+            </div>
+            <div class="card-body">
+                {{ form_errors(form) }}
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-file-signature fa-fw fa-2x"></i> </span>
+                                {{ form_widget(form.name, { 'attr': {'class': 'form-control', 'id':'name', 'placeholder':'Nome Completo' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa-fw fa-2x"></i> </span>
+                                {{ form_widget(formUser.email, { 'attr': {'class': 'form-control', 'id':'email', 'placeholder':'usuario@email.com' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-user fa-fw fa-2x"></i> </span>
+                                {{ form_widget(formUser.username, { 'attr': {'class': 'form-control', 'id':'username', 'placeholder':'Usuário' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-key fa-fw fa-2x"></i> </span>
+                                {{ form_widget(formUser.password, { 'attr': {'class': 'form-control', 'id':'password', 'placeholder':'Senha' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-map-signs fa-fw fa-2x"></i> </span>
+                                {{ form_widget(formAddress.street_name, { 'attr': {'class': 'form-control', 'id':'street', 'placeholder':'Endereço' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-home fa-fw fa-2x"></i> </span>
+                                {{ form_widget(formAddress.number, { 'attr': {'class': 'form-control', 'id':'number', 'placeholder':'Número' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon"><i class="fa fa-map-signs fa-fw fa-2x"></i> </span>
+                                {{ form_widget(formAddress.neightborhood, { 'attr': {'class': 'form-control', 'id':'street', 'placeholder':'Bairro' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}

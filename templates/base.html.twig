@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/0018442f3b.js" crossorigin="anonymous"></script>
+        {% block stylesheets %}
+            
+        {% endblock %}
+        <link href="{{ asset('css/general.css') }}" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" media="screen" href="//fonts.googleapis.com/css?family=Inconsolata" />
+    </head>
+    <body>
+      {% block nav %}
+      {% endblock %}
+        <div class="container">
+        {% block container %}
+            <div class="row">
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Controle de Acessos</h5>
+                            <form class="form-signin">
+                                <div class="form-label-group">
+                                    <input type="email" id="inputEmail" class="form-control" placeholder="E-mail" required autofocus>
+                                    <label for="inputEmail">E-mail</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
+                                    <label for="inputPassword">Senha</label>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Login</button>
+                                <a href="{{ path('create_account')|escape('html') }}" class="btn btn-lg btn-info btn-block text-uppercase">Registrar</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        </div>
+    </body>
+</html>
