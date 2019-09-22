@@ -29,6 +29,11 @@ class Addresses
     private $neightborhood;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $zipCode;
+
+    /**
      * @ORM\Column(type="string", length=200)
      */
     private $district;
@@ -78,6 +83,18 @@ class Addresses
     public function setNeightborhood(string $neightborhood): self
     {
         $this->neightborhood = $neightborhood;
+
+        return $this;
+    }
+
+    public function getZipCode(): ?string
+    {
+        return $this->zipCode;
+    }
+
+    public function setZipCode(string $zipCode): self
+    {
+        $this->zipCode = $zipCode;
 
         return $this;
     }

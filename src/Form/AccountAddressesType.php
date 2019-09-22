@@ -18,7 +18,8 @@ class AccountAddressesType extends AbstractType
             ->add('neightborhood', TextType::class)
             ->add('district', TextType::class)
             ->add('country', TextType::class)
-            ->add('number', IntegerType::class);
+            ->add('number', IntegerType::class)
+            ->add('zipCode', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

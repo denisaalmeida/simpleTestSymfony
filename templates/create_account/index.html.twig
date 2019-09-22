@@ -1,11 +1,50 @@
 {% extends 'base.html.twig' %}
-{% block title %}{% endblock %}
+{% block title %}Teste - Cadastro{% endblock %}
+{% block pageScript %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.datepicker').datepicker({
+            dateFormat: "dd/mm/yy",
+            dayNames: [ "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado" ],
+            dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ],
+            monthNames: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
+            monthNamesMin: [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez" ],
+            monthNamesShort: [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez" ],
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "c-99:c"
+        });
+        $('.zipcode').on("keyup blur",function(){            
+            if($(this).val().length == 9){
+                $("#errorMsg").remove();
+                $.get("http://viacep.com.br/ws/"+ $(this).val() +"/json/", function(callback){
+                    
+                    if(callback.erro){
+                        $('.zipcode').append('<p id="errorMsg"><div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Falha</strong> Cep Inválido.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div></p>');
+                    }
+                    
+                    $(".street_name").val(callback.logradouro);
+                    $(".number").val(callback.unidade);
+                    $(".neightborhood").val(callback.bairro);
+                    $(".district").val(callback.localidade + '/'+ callback.uf);
 
+                });
+            }
+        });
+        $('.zipcode').mask("99999-999");
+    });
+</script>
+{% endblock %}
 {% block nav %}
     {% include('nav.html.twig') %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item">
+                <a href="#">Home</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">Cadastro</li>
         </ol>
     </nav>
@@ -13,28 +52,45 @@
 
 {% block container %}
     <div class="card w-100 bg-light text-center">
-            <div class="card-header bg-dark text-white">
-                <div class="card-title font-weight-bold fa-2x">
-                    Cadastro Usuários
-                </div>
+        <div class="card-header bg-dark text-white">
+            <div class="card-title font-weight-bold fa-2x">
+                Cadastro Usuários
             </div>
-            <div class="card-body">
+        </div>
+        <div class="card-body">
+            <form method="post" action=" {{ path('create_account')|escape('html') }}">
                 {{ form_errors(form) }}
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-file-signature fa-fw fa-2x"></i> </span>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-file-signature fa-fw fa-2x"></i>
+                                </span>
                                 {{ form_widget(form.name, { 'attr': {'class': 'form-control', 'id':'name', 'placeholder':'Nome Completo' } }) }}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar fa-fw fa-2x"></i>
+                                    </span>
+                                    {{ form_widget(form.birthday_at) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-envelope fa-fw fa-2x"></i> </span>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-envelope fa-fw fa-2x"></i>
+                                </span>
                                 {{ form_widget(formUser.email, { 'attr': {'class': 'form-control', 'id':'email', 'placeholder':'usuario@email.com' } }) }}
                             </div>
                         </div>
@@ -44,7 +100,9 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-user fa-fw fa-2x"></i> </span>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user fa-fw fa-2x"></i>
+                                </span>
                                 {{ form_widget(formUser.username, { 'attr': {'class': 'form-control', 'id':'username', 'placeholder':'Usuário' } }) }}
                             </div>
                         </div>
@@ -54,18 +112,34 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-key fa-fw fa-2x"></i> </span>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-key fa-fw fa-2x"></i>
+                                </span>
                                 {{ form_widget(formUser.password, { 'attr': {'class': 'form-control', 'id':'password', 'placeholder':'Senha' } }) }}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-map-signs fa-fw fa-2x"></i>
+                                    </span>
+                                    {{ form_widget(formAddress.zipCode, { 'attr': {'class': 'form-control zipcode', 'id':'zipcode', 'data-mask':'99999-999', 'placeholder':'Digite o Cep' } }) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-map-signs fa-fw fa-2x"></i> </span>
-                                {{ form_widget(formAddress.street_name, { 'attr': {'class': 'form-control', 'id':'street', 'placeholder':'Endereço' } }) }}
+                                <span class="input-group-addon">
+                                    <i class="fa fa-map-signs fa-fw fa-2x"></i>
+                                </span>
+                                {{ form_widget(formAddress.street_name, { 'attr': {'class': 'form-control street_name', 'placeholder':'Endereço' } }) }}
                             </div>
                         </div>
                     </div>
@@ -74,8 +148,10 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-home fa-fw fa-2x"></i> </span>
-                                {{ form_widget(formAddress.number, { 'attr': {'class': 'form-control', 'id':'number', 'placeholder':'Número' } }) }}
+                                <span class="input-group-addon">
+                                    <i class="fa fa-home fa-fw fa-2x"></i>
+                                </span>
+                                {{ form_widget(formAddress.number, { 'attr': {'class': 'form-control number', 'placeholder':'Número' } }) }}
                             </div>
                         </div>
                     </div>
@@ -84,12 +160,49 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <div class="input-group margin-bottom-sm">
-                                <span class="input-group-addon"><i class="fa fa-map-signs fa-fw fa-2x"></i> </span>
-                                {{ form_widget(formAddress.neightborhood, { 'attr': {'class': 'form-control', 'id':'street', 'placeholder':'Bairro' } }) }}
+                                <span class="input-group-addon">
+                                    <i class="fa fa-map-pin fa-fw fa-2x"></i>
+                                </span>
+                                {{ form_widget(formAddress.neightborhood, { 'attr': {'class': 'form-control neightborhood', 'placeholder':'Bairro' } }) }}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-map-marked fa-fw fa-2x"></i>
+                                </span>
+                                {{ form_widget(formAddress.district, { 'attr': {'class': 'form-control district', 'placeholder':'Estado' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <div class="input-group margin-bottom-sm">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-globe-americas fa-fw fa-2x"></i>
+                                </span>
+                                {{ form_widget(formAddress.country, { 'attr': {'class': 'form-control country', 'placeholder':'Pais' } }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                     {{ form_widget(form._token) }} 
+                        <button class="btn btn-success btn-sm btn-block" type="submit">
+                            <i class="fa fa-save"></i>
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-{% endblock %}
+</div>{% endblock %}
+

@@ -16,7 +16,16 @@ class AccountCreateType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('birthday_at', DateType::class);
+            ->add('birthday_at', DateType::class, [
+                'format' => "dd/MM/yyyy",
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => [
+                    'class' => 'datepicker form-control',
+                    'id' => 'birthday_at',
+                    'placeholder' => "Digite a data de nascimento"
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

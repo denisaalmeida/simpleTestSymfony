@@ -24,6 +24,14 @@ class CreateAccountController extends AbstractController
         $formUser = $this->createForm(\App\Form\AccountUsersType::class, $accountUser);
         $formAddresses = $this->createForm(\App\Form\AccountAddressesType::class, $accountAddress);
 
+        $request = Request::createFromGlobals();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            var_dump($data);
+            die;
+        }
         return $this->render('create_account/index.html.twig', [
             'form' => $form->createView(),
             'formUser' => $formUser->createView(),
@@ -31,6 +39,14 @@ class CreateAccountController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/create/account/Save", name="createAcountSave")
+     */
     public function createAcount()
-    { }
+    {
+        echo "Aloooo";
+        $request = Request::createFromGlobals();
+        print_r($request);
+        die;
+    }
 }
