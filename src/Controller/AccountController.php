@@ -91,7 +91,7 @@ class AccountController extends AbstractController
                 $accountUser,
                 $accountUser->getPassword()
             ));
-            $roles = json_encode(['ROLES_DEFAULT']);
+            $roles = json_encode(['ROLE_DEFAULT']);
             $accountUser->setRoles($roles);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($accountUser);

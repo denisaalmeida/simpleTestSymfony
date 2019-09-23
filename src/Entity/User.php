@@ -35,7 +35,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Accounts", inversedBy="User", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Accounts", inversedBy="accountsUsers", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $account_id;
@@ -73,14 +73,14 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
+        $roles = json_decode($this->roles, true);
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    public function setRoles(Json $roles): self
+    public function setRoles($roles): self
     {
         $this->roles = $roles;
 

@@ -100,18 +100,18 @@ class Accounts
         return $this;
     }
 
-    public function getAccountsUsers(): ?AccountsUsers
+    public function getUser(): ?User
     {
         return $this->accountsUsers;
     }
 
-    public function setAccountsUsers(AccountsUsers $accountsUsers): self
+    public function setUser(\App\Entity\User $user): self
     {
-        $this->accountsUsers = $accountsUsers;
+        $this->accountsUsers = $user;
 
         // set the owning side of the relation if necessary
-        if ($this !== $accountsUsers->getAccountId()) {
-            $accountsUsers->setAccountId($this);
+        if ($this !== $user->getAccountId()) {
+            $user->setAccountId($this);
         }
 
         return $this;

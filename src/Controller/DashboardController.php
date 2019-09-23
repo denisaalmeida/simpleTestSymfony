@@ -9,6 +9,10 @@ class DashboardController extends AbstractController
 {
     /**
      * @Route("/dashboard", name="dashboard")
+     * 
+     * Require ROLE_DEFAULT for only this controller method.
+     *
+     * @IsGranted("ROLE_DEFAULT")
      */
     public function index()
     {
