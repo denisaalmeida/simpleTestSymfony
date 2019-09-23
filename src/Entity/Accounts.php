@@ -34,7 +34,7 @@ class Accounts
     private $addresses;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\AccountsUsers", mappedBy="account_id", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="account_id", cascade={"persist", "remove"})
      */
     private $accountsUsers;
 
