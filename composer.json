@@ -1,7 +1,7 @@
 {
     "type": "project",
     "name":"denisaalmeida/simpleTestSymfony",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "proprietary",
     "require": {
         "php": "^7.1.3",
