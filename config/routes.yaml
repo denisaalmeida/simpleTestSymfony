@@ -1,3 +1,11 @@
 index:
     path: /
     controller: App\Controller\LoginController::login
+
+create_account:
+    path: /create/account
+    controller: App\Controller\AccountController::create
+
+dashboard:
+    path: /dashboard
+    controller: App\Controller\DashboardController::index
