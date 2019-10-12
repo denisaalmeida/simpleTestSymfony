@@ -1,7 +1,7 @@
 {
     "type": "project",
     "name":"denisaalmeida/simpleTestSymfony",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "license": "proprietary",
     "description": "Projeto criado com o intuito de testar o framework symfony 4.3",
     "require": {
