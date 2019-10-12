@@ -7,6 +7,7 @@
 /var/
 /vendor/
 /tests/
+.vscode/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
